@@ -1,30 +1,21 @@
+import 'package:app/confin/constant.dart';
 import 'package:flutter/material.dart';
 
 class ShowIndex extends StatelessWidget {
-  const ShowIndex({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var setSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        color: Colors.red,
+        color: sColor,
         alignment: Alignment.center,
         width: setSize.width,
         child: Stack(
-          children:[
-            Positioned(
-              top: -30,
-              left: -30,
-              child: Image(
-                image: NetworkImage(
-                    'https://www.emojiall.com/images/240/twitter/1f7e0.png'),
-              width: setSize.width*0.4,
-              ),
-            ),
+          children: <Widget> [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: <Widget> [
                 Image.asset(
                   "asset/image/logo_kmutnb.png",
                   width: setSize.width * 0.4,
@@ -32,7 +23,7 @@ class ShowIndex extends StatelessWidget {
                 ),
                 Text("Welcome to KMUTNB",
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: pColor,
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     )),
@@ -47,7 +38,7 @@ class ShowIndex extends StatelessWidget {
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.amber,
+                    primary: pColor,
                     padding: EdgeInsets.fromLTRB(120, 10, 120, 10),
                     shape: StadiumBorder(),
                   ),
@@ -55,14 +46,16 @@ class ShowIndex extends StatelessWidget {
                     "Login",
                     style: TextStyle(fontSize: 24),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                     Navigator.pushNamed(context, 'Login');
+                  },
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.amber,
+                    primary: pColor,
                     padding: EdgeInsets.fromLTRB(110, 10, 110, 10),
                     shape: StadiumBorder(),
                   ),
@@ -70,10 +63,19 @@ class ShowIndex extends StatelessWidget {
                     "Sign up",
                     style: TextStyle(fontSize: 24),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'Register');
+                  },
                 )
               ],
-            )
+            ),           
+             Positioned(
+              top: -30,
+              left: -30,
+              child: Image.asset("asset/image/WowBule.png",
+                width: setSize.width * 0.4,
+                )
+            ),
           ],
         ),
       ),
