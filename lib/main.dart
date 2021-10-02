@@ -1,3 +1,4 @@
+import 'package:app/backend/dashboard.dart';
 import 'package:app/confin/constant.dart';
 import 'package:app/screen/login.dart';
 import 'package:app/screen/register.dart';
@@ -15,7 +16,8 @@ class ShowText extends StatelessWidget {
       home: ShowIndex(),
       routes: {
         'Login': (context) => Login(),
-        'Register': (context) => Register()
+        'Register': (context) => Register(),
+        'Dashboard': (context) => Dashboard()
       },
       theme:
           ThemeData(

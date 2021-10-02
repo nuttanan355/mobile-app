@@ -1,3 +1,4 @@
+import 'package:app/backend/database.dart';
 import 'package:app/confin/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -142,11 +143,14 @@ class _RegisterState extends State<Register> {
         ),
         onPressed: () {
           print("Hello");
+          var local = new DBLocal();
           if (formKey.currentState!.validate()) {
             formKey.currentState!.save();
-            print(
-                "Name : $name Surname : $surname Emai : $email Password : $password ");
+            // print(
+            // "Name : $name Surname : $surname Emai : $email Password : $password ");
+            local.register(name, surname, email, password);
             formKey.currentState!.reset();
+            Navigator.pushNamed(context, 'Login');
           }
         },
         child: Text('Submit'),
