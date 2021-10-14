@@ -80,6 +80,7 @@ class _LoginState extends State<Login> {
                 Container(
                   width: size.width * 0.8,
                   height: size.height * 0.08,
+                  // ignore: deprecated_member_use
                   child: RaisedButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),

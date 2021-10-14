@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:app/confin/constant.dart';
 import 'package:app/model/callAPI.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +35,75 @@ class DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: sColor,
+              ),
+              child: Text(
+                'Menu ',
+                style: TextStyle(
+                  fontSize: 28,
+                  color: Colors.blue,
+                ),
+              ),
+            ),
+            ListTile(
+              onTap: () {
+                print("Menu Video");
+                Navigator.pushNamed(context, 'Video');
+              },
+              title: Text(
+                'Video',
+                style: TextStyle(
+                  fontSize: 24,
+                ),
+              ),
+              leading: Icon(
+                Icons.video_call,
+                color: Colors.amber,
+                size: 36,
+              ),
+            ),
+            ListTile(
+              title: Text(
+                'Image',
+                style: TextStyle(
+                  fontSize: 24,
+                ),
+              ),
+              leading: Icon(
+                Icons.image,
+                color: Colors.green,
+                size: 36,
+              ),
+              onTap: () {
+                print('Menu Image');
+                Navigator.pushNamed(context, 'Image');
+              },
+            ),
+            ListTile(
+              onTap: () {
+                print('Menu Location');
+                Navigator.pushNamed(context, 'Location');
+              },
+              title: Text(
+                'Location',
+                style: TextStyle(
+                  fontSize: 24,
+                ),
+              ),
+              leading: Icon(
+                Icons.gps_fixed,
+                color: Colors.pink,
+                size: 36,
+              ),
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: Row(
           children: [
@@ -45,41 +116,10 @@ class DashboardState extends State<Dashboard> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              data?.activity ?? 'Loading...',
-              style: TextStyle(
-                color: pColor,
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              '${data?.price ?? ""}',
-              style: TextStyle(
-                color: pColor,
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              '${data?.price ?? ""}',
-              style: TextStyle(
-                color: pColor,
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              '${data?.participants ?? ""}',
-              style: TextStyle(
-                color: pColor,
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-              ),
-            )
+            Text(data?.activity ?? "loading.."),
+            Text(data?.type ?? ''),
+            Text('${data?.price ?? ""}'),
+            Text('${data?.participants ?? ""}'),
           ],
         ),
       ),
