@@ -1,0 +1,127 @@
+import 'package:app/confin/constant.dart';
+import 'package:flutter/material.dart';
+
+class AddData extends StatefulWidget {
+  const AddData({Key? key}) : super(key: key);
+
+  @override
+  _AddDataState createState() => _AddDataState();
+}
+
+class _AddDataState extends State<AddData> {
+  var name, surname, email, password;
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Register Firebase'),
+        ),
+        body: Form(
+          key: formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // txtName(),
+                // txtSurname(),
+                txtEmail(),
+                txtPassword(),
+                btnSubmit(),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget txtName() {
+    return Container(
+      margin: EdgeInsets.fromLTRB(15, 20, 15, 20),
+      child: TextFormField(
+        style: TextStyle(
+          fontSize: 24,
+          color: pColor,
+        ),
+        decoration: InputDecoration(
+          labelText: 'Name:',
+          icon: Icon(Icons.account_circle),
+          hintText: 'Input your name',
+        ),
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'กรุณาใส่ข้อมูลด้วย';
+          } else if (value.length < 2) {
+            return 'กรุณาใส่ข้อมูลมากกว่า 2 ตัวอักษร';
+          }
+        },
+        onSaved: (value) {
+          name = value;
+        },
+      ),
+    );
+  }
+
+  Widget txtEmail() {
+    return Container(
+      margin: EdgeInsets.fromLTRB(15, 20, 15, 20),
+      child: TextFormField(
+        keyboardType: TextInputType.emailAddress,
+        style: TextStyle(
+          fontSize: 24,
+          color: pColor,
+        ),
+        decoration: InputDecoration(
+          labelText: 'Email:',
+          icon: Icon(Icons.email),
+          hintText: 'Input your email',
+        ),
+        validator: (value) {
+          if (!(value!.contains('@'))) {
+            return 'กรุณากรอกข้อมูลตามรูปแบบอีเมลด้วย';
+          } else if (!(value.contains('.'))) {
+            return 'กรุณากรอกข้อมูลตามรูปแบบอีเมลด้วย';
+          }
+        },
+        onSaved: (value) {
+          email = value;
+        },
+      ),
+    );
+  }
+
+  Widget txtPassword() {
+    return Container(
+      margin: EdgeInsets.fromLTRB(15, 20, 15, 20),
+      child: TextFormField(
+        obscureText: true,
+        style: TextStyle(
+          fontSize: 24,
+          color: pColor,
+        ),
+        decoration: InputDecoration(
+          labelText: 'Password:',
+          icon: Icon(Icons.lock),
+          hintText: 'Input your password',
+        ),
+        onSaved: (value) {
+          password = value;
+        },
+      ),
+    );
+  }
+
+  Widget btnSubmit() => ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: pColor,
+        ),
+        onPressed: () {
+          if (formKey.currentState!.validate()) {
+            formKey.currentState!.save();
+          }
+        },
+        child: Text('Submit'),
+      );
+}

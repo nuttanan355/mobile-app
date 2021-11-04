@@ -101,6 +101,23 @@ class DashboardState extends State<Dashboard> {
                 size: 36,
               ),
             ),
+            ListTile(
+              onTap: () {
+                print('Menu Store');
+                Navigator.pushNamed(context, 'Store');
+              },
+              title: Text(
+                'Store',
+                style: TextStyle(
+                  fontSize: 24,
+                ),
+              ),
+              leading: Icon(
+                Icons.store,
+                color: Colors.purple,
+                size: 36,
+              ),
+            ),
           ],
         ),
       ),
