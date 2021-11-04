@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:app/backend/database.dart';
 import 'package:app/confin/constant.dart';
 import 'package:app/screen/login.dart';
@@ -168,9 +170,11 @@ Future<void> registerFirbase(email,password)async{
   .then((value){
       MaterialPageRoute materialPageRoute = MaterialPageRoute(
             builder: (BuildContext context) => Login());
-    Navigator.of(context).pushAndRemoveUntil(materialPageRoute, (Route<dynamic>route) => false);
+    Navigator.of(context).pushAndRemoveUntil(
+      materialPageRoute, (Route<dynamic>route) => false);
   }).catchError((onError){
     print(onError);
+    // ignore: unnecessary_brace_in_string_interps
     var msg ='${onError}';
     showAlert(msg);
   });

@@ -5,6 +5,7 @@ import 'package:app/screen/packagelocation.dart';
 import 'package:app/screen/packagevideo.dart';
 import 'package:app/screen/packegimage.dart';
 import 'package:app/screen/register.dart';
+import 'package:app/screen/store.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'screen/index.dart';
@@ -30,6 +31,7 @@ class ShowText extends StatelessWidget {
         'Image': (context) => PackageImage(),
         'Video': (context) => PackageVideo(),
         'Location': (context) => PackageLocation(),
+         'Store': (context) => Store(),
       },
       theme: ThemeData(primaryColor: pColor, secondaryHeaderColor: sColor),
       // seconder

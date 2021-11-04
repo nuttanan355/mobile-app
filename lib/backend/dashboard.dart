@@ -2,6 +2,7 @@
 
 import 'package:app/confin/constant.dart';
 import 'package:app/model/callAPI.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
@@ -21,7 +22,7 @@ class DashboardState extends State<Dashboard> {
     super.initState();
     print('Hello');
     callAPI();
-    ;
+    
   }
 
   Future<void> callAPI() async {
@@ -30,6 +31,11 @@ class DashboardState extends State<Dashboard> {
     setState(() {
       data = apiFromJson(response.body);
     });
+  }
+
+  Future<void> logout() async {
+    await FirebaseAuth.instance.signOut();
+    print("true");
   }
 
   @override
@@ -115,6 +121,24 @@ class DashboardState extends State<Dashboard> {
               leading: Icon(
                 Icons.store,
                 color: Colors.purple,
+                size: 36,
+              ),
+            ),
+            ListTile(
+              onTap: () {
+                logout();
+                Navigator.of(context).pop();
+                Navigator.pushNamed(context, 'Index', arguments: []);
+              },
+              title: Text(
+                'Log out',
+                style: TextStyle(
+                  fontSize: 24,
+                ),
+              ),
+              leading: Icon(
+                Icons.logout,
+                color: Colors.blue,
                 size: 36,
               ),
             ),
