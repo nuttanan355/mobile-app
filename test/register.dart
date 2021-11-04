@@ -1,7 +1,5 @@
 import 'package:app/backend/database.dart';
 import 'package:app/confin/constant.dart';
-import 'package:app/screen/login.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -27,8 +25,8 @@ class _RegisterState extends State<Register> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // txtName(),
-                // txtSurname(),
+                txtName(),
+                txtSurname(),
                 txtEmail(),
                 txtPassword(),
                 btnSubmit(),
@@ -144,68 +142,17 @@ class _RegisterState extends State<Register> {
           primary: pColor,
         ),
         onPressed: () {
-
-
-          // print("Hello");
-          // var local = new DBLocal();
+          print("Hello");
+          var local = new DBLocal();
           if (formKey.currentState!.validate()) {
             formKey.currentState!.save();
-            registerFirbase(email,password);
             // print(
             // "Name : $name Surname : $surname Emai : $email Password : $password ");
-            // local.register(name, surname, email, password);
-
+            local.register(name, surname, email, password);
             formKey.currentState!.reset();
             Navigator.pushNamed(context, 'Login');
           }
         },
         child: Text('Submit'),
       );
-
-Future<void> registerFirbase(email,password)async{
-  await FirebaseAuth.instance
-  .createUserWithEmailAndPassword(email: email, password: password)
-  .then((value){
-      MaterialPageRoute materialPageRoute = MaterialPageRoute(
-            builder: (BuildContext context) => Login());
-    Navigator.of(context).pushAndRemoveUntil(materialPageRoute, (Route<dynamic>route) => false);
-  }).catchError((onError){
-    print(onError);
-    var msg ='${onError}';
-    showAlert(msg);
-  });
-}
-
- void showAlert(String message) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: ListTile(
-              leading: Icon(
-                Icons.error,
-                color: Colors.red,
-                size: 48,
-              ),
-              title: Text(
-                "พบข้อผิดพลาด",
-                style: TextStyle(
-                  color: Colors.red,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            content: Text(message),
-            actions: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("ปิด"),
-              )
-            ],
-          );
-        });
-  }
-
 }

@@ -1,11 +1,9 @@
-import 'package:app/backend/dashboard.dart';
 import 'package:app/backend/database.dart';
 import 'package:app/confin/constant.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+  // const Login({Key? key}) : super(key: key);
 
   @override
   _LoginState createState() => _LoginState();
@@ -14,22 +12,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   var email, password;
   final formKey = GlobalKey<FormState>();
-
-  Future<void> checkUser() async {
-    try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) {
-        print('Success');
-        MaterialPageRoute materialPageRoute =
-            MaterialPageRoute(builder: (BuildContext context) => Dashboard());
-        Navigator.of(context).pushAndRemoveUntil(
-            materialPageRoute, (Route<dynamic> route) => false);
-      }).catchError((onError) {
-        print(onError);
-      });
-    } catch (e) {}
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +87,22 @@ class _LoginState extends State<Login> {
                         side: BorderSide(color: pColor)),
                     onPressed: () {
                       formKey.currentState!.save();
-                      checkUser();
+
+                      var local = DBLocal();
+                      local.login(email, password).then((response) {
+                        if (response) {
+                          print("success");
+                          Navigator.pushNamed(context, 'Dashboard');
+                        } else {
+                          print("fail");
+                          final bar = SnackBar(
+                            content: Text('ไม่พบข้อมูล'),
+                            backgroundColor: Colors.red[900],
+                          );
+
+                          ScaffoldMessenger.of(context).showSnackBar(bar);
+                        }
+                      });
                     },
                     color: pColor,
                     textColor: Colors.white,
